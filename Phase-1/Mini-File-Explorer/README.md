@@ -25,7 +25,7 @@ Mini File Explorer/
 │   └── (所有 .o 和可执行文件在这里生成)
 │
 ├── Makefile                 # 构建脚本
-└── README.md                # 项目说明（可选）
+└── README.md                # 项目说明
 ```
 
 ## **filesystem 库**

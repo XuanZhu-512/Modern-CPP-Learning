@@ -1,39 +1,53 @@
+# -----------------------------
+# Mini File Explorer Makefile
+# 可执行文件生成在根目录
+# 不使用 -p
+# -----------------------------
+
 # 编译器
-CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I$(INCLUDE_DIR)
+CXX := g++
+CXXFLAGS := -std=c++17 -Wall -Wextra -Iinclude
 
-# 目录（去掉引号）
-SRC_DIR = D:/Learning/Modern\  C++\ Learning/Phase\ 1/Mini\ File\ Explorer/src
-BUILD_DIR = D:/Learning/Modern\  C++\ Learning/Phase\ 1/Mini\ File\ Explorer/build
-INCLUDE_DIR = D:/Learning/Modern\  C++\ Learning/Phase\ 1/Mini\ File\ Explorer/include
+# 目录
+SRC_DIR := src
+BUILD_DIR := build
 
-# 源文件
-SRCS = $(SRC_DIR)/main.cpp $(SRC_DIR)/FileManager.cpp
+# 源文件、目标文件和依赖文件
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))
+DEPS := $(OBJS:.o=.d)
 
-# 对应的对象文件
-OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/FileManager.o
+# 可执行文件（放在根目录）
+TARGET := FileManager
 
-# 可执行文件
-TARGET = $(BUILD_DIR)/MiniFileExplorer.exe
-
+# -----------------------------
 # 默认目标
-all: build $(TARGET)
+# -----------------------------
+all: $(TARGET)
 
 # 链接可执行文件
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# 编译对象文件
-$(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp | build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# 编译源文件为目标文件，并生成依赖文件
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
-$(BUILD_DIR)/FileManager.o: $(SRC_DIR)/FileManager.cpp | build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# 包含依赖文件，如果不存在则忽略
+-include $(DEPS)
 
-# 创建 build 目录
-build:
-	if not exist "$(BUILD_DIR)" mkdir "$(BUILD_DIR)"
-
-# 清理
+# -----------------------------
+# 清理目标
+# -----------------------------
+.PHONY: clean
 clean:
-	if exist "$(BUILD_DIR)" del /Q "$(BUILD_DIR)\*" 2>nul
+	@echo Cleaning...
+	@rmdir /S /Q $(BUILD_DIR) 2>NUL || rm -rf $(BUILD_DIR)/* 2>/dev/null || true
+	@rm -f $(TARGET) 2>NUL || true
+
+# -----------------------------
+# 重新编译
+# -----------------------------
+.PHONY: rebuild
+rebuild: clean all
