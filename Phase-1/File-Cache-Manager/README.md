@@ -1,10 +1,20 @@
 ## **Introduction**
 这是一个基于 C++17 及以上的文件缓存管理系统
 
+**Supporting Commands**
+- `<load> path`
+
+- `<show> path`
+- `status`
+- `clear`
+- `exit` 
+
+
 - `CacheManager` 基于 LRU 策略管理缓存池
 - `FileLoader` 根据给定路径加载文件内容
 - `FileCache` 提供对于缓存文件的一系列操作
 
+**Logic of Source Files**
 ``` css
 ┌─────────────┐
 │  main.cpp   │
@@ -21,7 +31,7 @@
 └─────────────┘
 ```
 
-## **Structure**
+## **Project Structure**
 ```
 FileCacheManager/
 │

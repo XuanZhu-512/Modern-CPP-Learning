@@ -1,7 +1,7 @@
 ## **Introduction**
 这是一个基于 C++17 <filesystem>库 制作的简易文件管理器，提供了类似 Linux 操作系统管理文件的各种方法
 
-**操作支持**
+**Supporting Commands**
 - `ls`
   
 - `cd <dir>`
