@@ -1,23 +1,9 @@
-## **Structure**
-```
-FileCacheManager/
-│
-├─ include/
-│   ├─ FileCache.h         # 缓存文件对象
-│   ├─ CacheManager.h      # 管理缓存池（LRU）
-│   ├─ FileLoader.h        # 文件读取工具
-│   └─ FileSearcher.h      # 文件搜索模块
-│
-├─ src/
-│   ├─ FileCache.cpp
-│   ├─ CacheManager.cpp
-│   ├─ FileLoader.cpp
-│   ├─ FileSearcher.cpp
-│   └─ main.cpp
-│
-├─ CMakeLists.txt          # 构建文件
-└─ README.md
-```
+## **Introduction**
+这是一个基于 C++17 及以上的文件缓存管理系统
+
+- `CacheManager` 基于 LRU 策略管理缓存池
+- `FileLoader` 根据给定路径加载文件内容
+- `FileCache` 提供对于缓存文件的一系列操作
 
 ``` css
 ┌─────────────┐
@@ -33,11 +19,25 @@ FileCacheManager/
 ┌─────────────┐
 │ FileLoader  │
 └─────────────┘
-      │
-      ▼
-┌─────────────┐
-│ FileSearcher│
-└─────────────┘
+```
+
+## **Structure**
+```
+FileCacheManager/
+│
+├─ include/
+│   ├─ FileCache.h         # 缓存文件对象
+│   ├─ CacheManager.h      # 管理缓存池（LRU）
+│   └─ FileLoader.h       # 文件读取工具
+│
+├─ src/
+│   ├─ FileCache.cpp
+│   ├─ CacheManager.cpp
+│   ├─ FileLoader.cpp
+│   └─ main.cpp
+│
+├─ CMakeLists.txt          # 构建文件
+└─ README.md
 ```
 
 ## **Usage of STL**
@@ -73,3 +73,10 @@ FileCacheManager/
 `std::ifstream file(path, std::ios::in | std::ios::binary)` 同时以输入模式和二进制模式通向指定文件的流对象
 
 1. `rdbuf()`方法（read buffer），在两个流之间进行数据存储
+
+### **mutex 库**
+作为一个同步原语保护共享数据。确保在任何时刻，只有一个线程能够访问被其保护的共享数据
+
+`lock_guard`模板类，实现 RAII 模式管理互斥锁。用于简化和安全管理互斥锁，解决手动加锁和解锁带来的两大问题：忘记解锁和异常安全
+
+1. `std::lock_guard<std::mutex> lock(mtx_)`构造函数，接收一个 `mutex` 类型对象。执行此代码时会自动上锁，直到锁被自动释放（离开作用域）

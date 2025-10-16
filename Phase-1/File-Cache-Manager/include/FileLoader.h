@@ -13,10 +13,7 @@ public:
     ~FileLoader() = default;
 
     // 读取整个文件内容
-    std::string loadFile(const std::filesystem::path& path) const;
-
-    // 检查文件是否存在且可读
-    bool fileExists(const std::filesystem::path& path) const noexcept;
+    std::shared_ptr<std::string> loadFile(const std::filesystem::path& path) const;
 
 private:
     static constexpr std::size_t MAX_FILE_SIZE = 10 * 1024 * 1024;

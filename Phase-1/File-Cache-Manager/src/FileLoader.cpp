@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-std::string FileLoader::loadFile(const std::filesystem::path &path) const {
+std::shared_ptr<std::string> FileLoader::loadFile(const std::filesystem::path &path) const {
     if (!std::filesystem::exists(path)) {
         throw std::runtime_error("File not found: " + path.string());
     }
@@ -24,9 +24,5 @@ std::string FileLoader::loadFile(const std::filesystem::path &path) const {
     std::ostringstream buffer;
     buffer << file.rdbuf(); // 读取整个文件到内存
 
-    return buffer.str();
-}
-
-bool FileLoader::fileExists(const std::filesystem::path &path) const noexcept {
-    return std::filesystem::exists(path) && std::filesystem::is_regular_file(path);
+    return std::make_shared<std::string>(buffer.str());
 }

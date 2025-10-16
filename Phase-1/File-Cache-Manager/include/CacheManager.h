@@ -20,5 +20,26 @@ public:
     CacheManager& operator=(CacheManager&&) noexcept = default;
 
     // 获取文件缓存（若未缓存则自动加载）
+    std::shared_ptr<const std::string> getFile(const std::string& path);
+
+    // 清空所有缓存
+    void clear();
+
+    // 输出当前缓存状态（调试）
+    void printStatus() const;
+
 private:
+    struct CacheEntry {
+        std::unique_ptr<FileCache> cache;
+        std::list<std::string>::iterator orderIt;
+    };
+
+    mutable std::mutex mtx_;
+    std::unordered_map<std::string, CacheEntry> cacheMap_; // LRU 缓存的主查找表
+    std::list<std::string> usageOrder_; // LRU 队列
+    size_t maxSize_;
+    FileLoader loader_;
+
+    void touch(const std::string& path); // 更新使用顺序
+    void evictIfNeeded();                // 超出容量时移除旧缓存
 };

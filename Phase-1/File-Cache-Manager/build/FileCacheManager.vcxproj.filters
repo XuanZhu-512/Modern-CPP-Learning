@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Learning\Modern-CPP-Learning\Phase-1\File-Cache-Manager\src\CacheManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Learning\Modern-CPP-Learning\Phase-1\File-Cache-Manager\src\FileCache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Learning\Modern-CPP-Learning\Phase-1\File-Cache-Manager\src\FileLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Learning\Modern-CPP-Learning\Phase-1\File-Cache-Manager\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Learning\Modern-CPP-Learning\Phase-1\File-Cache-Manager\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CE5A5A01-1359-31E4-A2FC-5248ACC099FC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

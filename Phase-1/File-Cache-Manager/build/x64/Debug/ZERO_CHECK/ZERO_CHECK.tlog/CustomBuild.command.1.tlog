@@ -1,0 +1,10 @@
+^D:\LEARNING\MODERN-CPP-LEARNING\PHASE-1\FILE-CACHE-MANAGER\BUILD\CMAKEFILES\EC9901E68E2A10E8636A40DC4C5D726E\GENERATE.STAMP.RULE
+setlocal
+D:\Study\CMake\bin\cmake.exe -SD:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager -BD:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager/build/FileCacheManager.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

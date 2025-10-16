@@ -1,0 +1,3 @@
+D:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager/build/CMakeFiles/FileCacheManager.dir
+D:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager/build/CMakeFiles/ALL_BUILD.dir
+D:/Learning/Modern-CPP-Learning/Phase-1/File-Cache-Manager/build/CMakeFiles/ZERO_CHECK.dir
